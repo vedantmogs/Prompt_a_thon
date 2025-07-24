@@ -111,7 +111,7 @@
     justify-content:center;
     padding:20px;
   }
-  .modal:target{
+  .modal.active{
     opacity:1;
     pointer-events:auto;
   }
@@ -160,6 +160,7 @@
     line-height:1;
     color:#fff;
     text-decoration:none;
+    cursor:pointer;
   }
   .close:hover{
     color:#ff4444;
@@ -271,6 +272,7 @@
     color:#fff;
     text-decoration:none;
     font-size:1.8rem;
+    cursor:pointer;
   }
   .shake{
     animation:shake .3s linear 1;
@@ -289,259 +291,138 @@
   <p class="section-subtitle">Choose from our eeriest rooms, if you dare...</p>
 
   <div class="rooms-container">
-    <!-- ROOM 1 -->
-    <a href="#room1" class="room-card">
+    <a href="#" class="room-card">
       <img src="images/room1.jpeg" alt="Room 13">
       <div class="room-info">
         <h3>Room 13</h3>
         <p>The walls know your name before you speak it.</p>
       </div>
     </a>
-
-    <!-- ROOM 2 -->
-    <a href="#room2" class="room-card">
+    <a href="#" class="room-card">
       <img src="images/room2.jpeg" alt="Bloody Ballroom">
       <div class="room-info">
         <h3>Bloody Ballroom</h3>
         <p>The floor is still wet... but it's not water.</p>
       </div>
     </a>
-
-    <!-- ROOM 3 -->
-    <a href="#room3" class="room-card">
+    <a href="#" class="room-card">
       <img src="images/room3.jpeg" alt="Coffin Chamber">
       <div class="room-info">
         <h3>Coffin Chamber</h3>
         <p>Lie down, and the lid might close on its own.</p>
       </div>
     </a>
-
-    <!-- ROOM 4 -->
-    <a href="#room4" class="room-card">
-      <img src="images/room4.jpeg" alt="Phantom's Attic">
-      <div class="room-info">
-        <h3>Phantom's Attic</h3>
-        <p>Every object whispers the name of its last owner.</p>
-      </div>
-    </a>
-
-    <!-- ROOM 5 -->
-    <a href="#room5" class="room-card">
-      <img src="images/room5.jpeg" alt="The Silent Crypt">
-      <div class="room-info">
-        <h3>The Silent Crypt</h3>
-        <p>Your screams die before leaving your throat.</p>
-      </div>
-    </a>
-
-    <!-- ROOM 6 -->
-    <a href="#room6" class="room-card">
-      <img src="images/room6.jpeg" alt="Weeping Widow Room">
-      <div class="room-info">
-        <h3>Weeping Widow Room</h3>
-        <p>She cries because you're already hers.</p>
-      </div>
-    </a>
-
-    <!-- ROOM 7 -->
-    <a href="#room7" class="room-card">
-      <img src="images/room7.jpeg" alt="Vampire's Lair">
-      <div class="room-info">
-        <h3>Vampire's Lair</h3>
-        <p>Every mirror tells you you're already dead.</p>
-      </div>
-    </a>
-
-    <!-- ROOM 8 -->
-    <a href="#room8" class="room-card">
-      <img src="images/room8.jpeg" alt="Dollmaker's Suite">
-      <div class="room-info">
-        <h3>Dollmaker's Suite</h3>
-        <p>The dolls wait for you to blink.</p>
-      </div>
-    </a>
-
-    <!-- ROOM 9 -->
-    <a href="#room9" class="room-card">
-      <img src="images/room9.jpeg" alt="The Curse Chamber">
-      <div class="room-info">
-        <h3>The Curse Chamber</h3>
-        <p>Say your name once and never hear it again.</p>
-      </div>
-    </a>
   </div>
 
-  <!-- ============ MODALS ============ -->
-  <!-- Room 1 -->
-  <div id="room1" class="modal">
+  <!-- MODALS -->
+  <div class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
+      <a class="close">×</a>
       <img src="images/room1.jpeg" alt="Room 13 full view">
       <h3>Room 13 — The Whispering Suite</h3>
       <div class="count">23 guests checked in. 2 checked out.</div>
-      <p>The walls hum at 3:13 a.m., repeating the last words of those who slept here. Some tried recording the whispers—only to find their own voice pleading from the future.</p>
-      <ul>
-        <li>Warning: If the phone rings, do not answer.</li>
-        <li>Do not stand between the mirrors after midnight.</li>
-        <li>Ignore the knock from inside the wardrobe.</li>
-      </ul>
-      <button class="btn play-btn" data-room="Room 13">Start Minigame</button>
+      <p>The walls hum at 3:13 a.m., repeating the last words of those who slept here.</p>
+      <button class="btn play-btn">Start Minigame</button>
     </div>
   </div>
 
-  <!-- Room 2 -->
-  <div id="room2" class="modal">
+  <div class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
+      <a class="close">×</a>
       <img src="images/room2.jpeg" alt="Bloody Ballroom full view">
       <h3>Bloody Ballroom — Where Shadows Dance</h3>
       <div class="count">17 dancers entered. 0 left.</div>
-      <p>The floor still glistens with something darker than wine. The chandeliers creak as if invisible dancers swing from them, and every wrong piano note sounds like a scream.</p>
-      <ul>
-        <li>Warning: If music starts, do not step onto the floor.</li>
-        <li>Do not bow to the shadow that bows first.</li>
-        <li>Never accept a hand from something you can't see.</li>
-      </ul>
-      <button class="btn play-btn" data-room="Bloody Ballroom">Start Minigame</button>
+      <p>The floor still glistens with something darker than wine.</p>
+      <button class="btn play-btn">Start Minigame</button>
     </div>
   </div>
 
-  <!-- Room 3 -->
-  <div id="room3" class="modal">
+  <div class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
+      <a class="close">×</a>
       <img src="images/room3.jpeg" alt="Coffin Chamber full view">
       <h3>Coffin Chamber — Sleep if You Dare</h3>
       <div class="count">41 sleepers went in. 3 woke up elsewhere.</div>
-      <p>The coffin-shaped bed closes on its own. Guests report dreams of being buried alive, and some wake up scratching from inside the wardrobe.</p>
-      <ul>
-        <li>Warning: If you wake up under the bed, keep your eyes shut.</li>
-        <li>Do not count your breaths — one might be missing.</li>
-      </ul>
-      <button class="btn play-btn" data-room="Coffin Chamber">Start Minigame</button>
+      <p>The coffin-shaped bed closes on its own.</p>
+      <button class="btn play-btn">Start Minigame</button>
     </div>
   </div>
 
-  <!-- Room 4 -->
-  <div id="room4" class="modal">
-    <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room4.jpeg" alt="Phantom's Attic full view">
-      <h3>Phantom's Attic — Echoes of Lost Souls</h3>
-      <div class="count">9 explorers climbed up. 1 returned voiceless.</div>
-      <p>The attic writes names on dusty tags — always dated tomorrow. Read one aloud, and you'll find yourself listed as the next souvenir.</p>
-      <ul>
-        <li>Warning: Do not read the tags out loud.</li>
-        <li>If you hear breathing, leave. Do not look back.</li>
-      </ul>
-      <button class="btn play-btn" data-room="Phantom's Attic">Start Minigame</button>
-    </div>
-  </div>
-
-  <!-- Room 5 -->
-  <div id="room5" class="modal">
-    <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room5.jpeg" alt="The Silent Crypt full view">
-      <h3>The Silent Crypt — Chill in the Darkness</h3>
-      <div class="count">29 guests went silent. All stayed deaf inside.</div>
-      <p>Sound dies here. Your scream won’t even echo. Sometimes, the mirror forms your lips silently saying goodbye.</p>
-      <ul>
-        <li>Warning: If your ears ring, you've been heard.</li>
-        <li>Never seek the source of the cold breath.</li>
-      </ul>
-      <button class="btn play-btn" data-room="The Silent Crypt">Start Minigame</button>
-    </div>
-  </div>
-
-  <!-- Room 6 -->
-  <div id="room6" class="modal">
-    <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room6.jpeg" alt="Weeping Widow Room full view">
-      <h3>Weeping Widow Room — She Cries at Midnight</h3>
-      <div class="count">13 suitors stayed. 13 funerals followed.</div>
-      <p>Every midnight, a shadowy bride appears in the fogged window asking if you'll stay forever. Saying "no" just makes her smile wider behind you.</p>
-      <ul>
-        <li>Warning: Don't wipe her tears off the glass.</li>
-        <li>Do not answer whispers from corners.</li>
-      </ul>
-      <button class="btn play-btn" data-room="Weeping Widow Room">Start Minigame</button>
-    </div>
-  </div>
-
-  <!-- Room 7 -->
-  <div id="room7" class="modal">
-    <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room7.jpeg" alt="Vampire's Lair full view">
-      <h3>Vampire’s Lair — Stay Forever</h3>
-      <div class="count">66 visitors vanished. None show up in mirrors anymore.</div>
-      <p>The minibar is full of red bottles with no labels. The mirror fogs, writing: "Drink first." Those who did never woke with a pulse.</p>
-      <ul>
-        <li>Warning: Don't drink anything uncapped.</li>
-        <li>Do not photograph yourself after 3:00 a.m.</li>
-      </ul>
-      <button class="btn play-btn" data-room="Vampire's Lair">Start Minigame</button>
-    </div>
-  </div>
-
-  <!-- =========== MINIGAME OVERLAY =========== -->
-  <div class="game-overlay" id="game">
+  <!-- MINIGAME -->
+  <div id="game" class="game-overlay">
     <div class="game-screen">
-      <a href="#" class="game-close">×</a>
-      <h3 class="game-title">Escape the Haunted Door</h3>
-      <p class="game-progress">Choose the right door to survive!</p>
+      <a class="game-close">×</a>
+      <h3 class="game-title">Choose a Door to Survive</h3>
+      <div class="game-progress">Can you escape?</div>
       <div class="doors">
         <div class="door" data-choice="1">1</div>
         <div class="door" data-choice="2">2</div>
         <div class="door" data-choice="3">3</div>
       </div>
-      <p class="result-text"></p>
+      <div class="result-text"></div>
       <button class="btn retry-btn" style="display:none;">Try Again</button>
     </div>
   </div>
 
-  <script>
-    const playButtons = document.querySelectorAll('.play-btn');
-    const gameOverlay = document.getElementById('game');
-    const doors = document.querySelectorAll('.door');
-    const resultText = document.querySelector('.result-text');
-    const retryBtn = document.querySelector('.retry-btn');
-    const closeGame = document.querySelector('.game-close');
+<script>
+  // MODALS
+  const modals = document.querySelectorAll('.modal');
+  const roomLinks = document.querySelectorAll('.room-card');
+  const closeButtons = document.querySelectorAll('.close');
 
-    let winningDoor = Math.floor(Math.random() * 3) + 1;
-
-    playButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        gameOverlay.classList.add('active');
-        resetGame();
-      });
+  roomLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      modals[index].classList.add('active');
     });
+  });
 
-    doors.forEach(door => {
-      door.addEventListener('click', () => {
-        const choice = door.dataset.choice;
-        if (parseInt(choice) === winningDoor) {
-          resultText.textContent = 'You Escaped! 🏆';
-          resultText.className = 'result-text win';
-        } else {
-          resultText.textContent = 'Wrong door... You are trapped! ☠️';
-          resultText.className = 'result-text die';
-        }
-        retryBtn.style.display = 'inline-block';
-      });
+  closeButtons.forEach(close => {
+    close.addEventListener('click', () => {
+      close.closest('.modal').classList.remove('active');
     });
+  });
 
-    retryBtn.addEventListener('click', resetGame);
-    closeGame.addEventListener('click', () => gameOverlay.classList.remove('active'));
+  // MINIGAME
+  const playButtons = document.querySelectorAll('.play-btn');
+  const gameOverlay = document.getElementById('game');
+  const doors = document.querySelectorAll('.door');
+  const resultText = document.querySelector('.result-text');
+  const retryBtn = document.querySelector('.retry-btn');
+  const closeGame = document.querySelector('.game-close');
 
-    function resetGame() {
-      winningDoor = Math.floor(Math.random() * 3) + 1;
-      resultText.textContent = '';
-      resultText.className = 'result-text';
-      retryBtn.style.display = 'none';
-    }
-  </script>
+  let winningDoor = Math.floor(Math.random() * 3) + 1;
+
+  playButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      gameOverlay.classList.add('active');
+      resetGame();
+    });
+  });
+
+  doors.forEach(door => {
+    door.addEventListener('click', () => {
+      const choice = door.dataset.choice;
+      if (parseInt(choice) === winningDoor) {
+        resultText.textContent = 'You Escaped! 🏆';
+        resultText.className = 'result-text win';
+      } else {
+        resultText.textContent = 'Wrong door... You are trapped! ☠️';
+        resultText.className = 'result-text die';
+      }
+      retryBtn.style.display = 'inline-block';
+    });
+  });
+
+  retryBtn.addEventListener('click', resetGame);
+  closeGame.addEventListener('click', () => gameOverlay.classList.remove('active'));
+
+  function resetGame() {
+    winningDoor = Math.floor(Math.random() * 3) + 1;
+    resultText.textContent = '';
+    resultText.className = 'result-text';
+    retryBtn.style.display = 'none';
+  }
+</script>
 </body>
 </html>
