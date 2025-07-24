@@ -482,4 +482,66 @@
         <li>Warning: Don't drink anything uncapped.</li>
         <li>Do not photograph yourself after 3:00 a.m.</li>
       </ul>
-      <button class="btn play-btn" data-room="Vampire's Lair">Start Minigame</button
+      <button class="btn play-btn" data-room="Vampire's Lair">Start Minigame</button>
+    </div>
+  </div>
+
+  <!-- =========== MINIGAME OVERLAY =========== -->
+  <div class="game-overlay" id="game">
+    <div class="game-screen">
+      <a href="#" class="game-close">×</a>
+      <h3 class="game-title">Escape the Haunted Door</h3>
+      <p class="game-progress">Choose the right door to survive!</p>
+      <div class="doors">
+        <div class="door" data-choice="1">1</div>
+        <div class="door" data-choice="2">2</div>
+        <div class="door" data-choice="3">3</div>
+      </div>
+      <p class="result-text"></p>
+      <button class="btn retry-btn" style="display:none;">Try Again</button>
+    </div>
+  </div>
+
+  <script>
+    const playButtons = document.querySelectorAll('.play-btn');
+    const gameOverlay = document.getElementById('game');
+    const doors = document.querySelectorAll('.door');
+    const resultText = document.querySelector('.result-text');
+    const retryBtn = document.querySelector('.retry-btn');
+    const closeGame = document.querySelector('.game-close');
+
+    let winningDoor = Math.floor(Math.random() * 3) + 1;
+
+    playButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        gameOverlay.classList.add('active');
+        resetGame();
+      });
+    });
+
+    doors.forEach(door => {
+      door.addEventListener('click', () => {
+        const choice = door.dataset.choice;
+        if (parseInt(choice) === winningDoor) {
+          resultText.textContent = 'You Escaped! 🏆';
+          resultText.className = 'result-text win';
+        } else {
+          resultText.textContent = 'Wrong door... You are trapped! ☠️';
+          resultText.className = 'result-text die';
+        }
+        retryBtn.style.display = 'inline-block';
+      });
+    });
+
+    retryBtn.addEventListener('click', resetGame);
+    closeGame.addEventListener('click', () => gameOverlay.classList.remove('active'));
+
+    function resetGame() {
+      winningDoor = Math.floor(Math.random() * 3) + 1;
+      resultText.textContent = '';
+      resultText.className = 'result-text';
+      retryBtn.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
