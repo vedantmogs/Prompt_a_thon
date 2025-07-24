@@ -28,6 +28,27 @@
     color:var(--accent);
     margin:30px 0 10px;
     animation:flicker 2s infinite;
+    position: relative;
+  }
+
+  /* Blood drip effect (simple) */
+  h2.blood:after{
+    content:'';
+    position:absolute;
+    left:50%;
+    width:6px;
+    height:22px;
+    background:var(--accent);
+    border-radius:0 0 3px 3px;
+    animation:drip 3.5s infinite ease-in;
+    transform:translateX(-50%);
+    box-shadow: 0 0 8px rgba(255,0,0,0.35);
+  }
+  @keyframes drip{
+    0%{ height:0; opacity:0; }
+    20%{ height:18px; opacity:1; }
+    60%{ height:6px; opacity:.6; }
+    100%{ height:0; opacity:0; }
   }
 
   p.section-subtitle{
@@ -282,41 +303,111 @@
     75%{ transform:translateX(-6px); }
     100%{ transform:translateX(0); }
   }
+
+  /* Glitch text */
+  .glitch{
+    position:relative;
+    display:inline-block;
+    animation:glitch-skew 2.5s infinite linear alternate-reverse;
+  }
+  .glitch::before,
+  .glitch::after{
+    content:attr(data-text);
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+  }
+  .glitch::before{
+    left:2px;
+    text-shadow:-2px 0 #0ff;
+    clip-path:polygon(0 0,100% 0,100% 45%,0 45%);
+    animation:glitch-clip 2s infinite linear alternate-reverse;
+  }
+  .glitch::after{
+    left:-2px;
+    text-shadow:-2px 0 #f0f;
+    clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);
+    animation:glitch-clip 2.2s infinite linear alternate-reverse;
+  }
+  @keyframes glitch-clip{
+    0%{ clip-path:polygon(0 2%,100% 2%,100% 10%,0 10%); }
+    20%{ clip-path:polygon(0 20%,100% 20%,100% 30%,0 30%); }
+    40%{ clip-path:polygon(0 40%,100% 40%,100% 55%,0 55%); }
+    60%{ clip-path:polygon(0 60%,100% 60%,100% 70%,0 70%); }
+    80%{ clip-path:polygon(0 80%,100% 80%,100% 90%,0 90%); }
+    100%{ clip-path:polygon(0 10%,100% 10%,100% 15%,0 15%); }
+  }
+  @keyframes glitch-skew{
+    0%{ transform:skew(0deg); }
+    50%{ transform:skew(2deg); }
+    100%{ transform:skew(-1deg); }
+  }
+
+  /* Result Board */
+  .board{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    z-index:10010;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .board.active{
+    display:flex;
+  }
+  .board-box{
+    max-width:600px;
+    width:100%;
+    background:#111;
+    border:1px solid #222;
+    border-radius:12px;
+    box-shadow:0 0 25px rgba(255,0,0,.15);
+    padding:32px 24px 28px;
+    text-align:center;
+    position:relative;
+  }
+  .board h2{
+    margin:0 0 10px;
+    font-family:'Creepster', cursive;
+  }
+  .board p{
+    margin:0 0 14px;
+    color:#ccc;
+    line-height:1.6;
+  }
+  .board .btn{
+    margin:8px 8px 0;
+  }
 </style>
 </head>
 <body>
-  <h2>Haunted Rooms</h2>
+  <h2 class="blood">Haunted Rooms</h2>
   <p class="section-subtitle">Choose from our eeriest rooms, if you dare...</p>
 
   <div class="rooms-container">
-    <!-- ROOM 1 -->
     <a href="#room1" class="room-card">
-      <img src="images/room1.jpeg" alt="Room 13">
+      <img src="images/room1.jpg" alt="Room 13">
       <div class="room-info">
         <h3>Room 13</h3>
         <p>The walls know your name before you speak it.</p>
       </div>
     </a>
-
-    <!-- ROOM 2 -->
     <a href="#room2" class="room-card">
-      <img src="images/room2.jpeg" alt="Bloody Ballroom">
+      <img src="images/room2.jpg" alt="Bloody Ballroom">
       <div class="room-info">
         <h3>Bloody Ballroom</h3>
         <p>The floor is still wet... but it's not water.</p>
       </div>
     </a>
-
-    <!-- ROOM 3 -->
     <a href="#room3" class="room-card">
-      <img src="images/room3.jpeg" alt="Coffin Chamber">
+      <img src="images/room3.jpg" alt="Coffin Chamber">
       <div class="room-info">
         <h3>Coffin Chamber</h3>
         <p>Lie down, and the lid might close on its own.</p>
       </div>
     </a>
-
-    <!-- ROOM 4 -->
     <a href="#room4" class="room-card">
       <img src="images/room4.jpeg" alt="Phantom's Attic">
       <div class="room-info">
@@ -324,8 +415,6 @@
         <p>Every object whispers the name of its last owner.</p>
       </div>
     </a>
-
-    <!-- ROOM 5 -->
     <a href="#room5" class="room-card">
       <img src="images/room5.jpeg" alt="The Silent Crypt">
       <div class="room-info">
@@ -333,8 +422,6 @@
         <p>Your screams die before leaving your throat.</p>
       </div>
     </a>
-
-    <!-- ROOM 6 -->
     <a href="#room6" class="room-card">
       <img src="images/room6.jpeg" alt="Weeping Widow Room">
       <div class="room-info">
@@ -342,28 +429,22 @@
         <p>She cries because you're already hers.</p>
       </div>
     </a>
-
-    <!-- ROOM 7 -->
     <a href="#room7" class="room-card">
-      <img src="images/room7.jpeg" alt="Vampire's Lair">
+      <img src="images/room7.jpg" alt="Vampire's Lair">
       <div class="room-info">
         <h3>Vampire's Lair</h3>
         <p>Every mirror tells you you're already dead.</p>
       </div>
     </a>
-
-    <!-- ROOM 8 -->
     <a href="#room8" class="room-card">
-      <img src="images/room8.jpeg" alt="Dollmaker's Suite">
+      <img src="images/room8.jpg" alt="Dollmaker's Suite">
       <div class="room-info">
         <h3>Dollmaker's Suite</h3>
         <p>The dolls wait for you to blink.</p>
       </div>
     </a>
-
-    <!-- ROOM 9 -->
     <a href="#room9" class="room-card">
-      <img src="images/room9.jpeg" alt="The Curse Chamber">
+      <img src="images/room9.jpg" alt="The Curse Chamber">
       <div class="room-info">
         <h3>The Curse Chamber</h3>
         <p>Say your name once and never hear it again.</p>
@@ -375,8 +456,8 @@
   <!-- Room 1 -->
   <div id="room1" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room1.jpeg" alt="Room 13 full view">
+      <a href="#!" class="close">&times;</a>
+      <img src="images/room1.jpg" alt="Room 13 full view">
       <h3>Room 13 — The Whispering Suite</h3>
       <div class="count">23 guests checked in. 2 checked out.</div>
       <p>The walls hum at 3:13 a.m., repeating the last words of those who slept here. Some tried recording the whispers—only to find their own voice pleading from the future.</p>
@@ -392,8 +473,8 @@
   <!-- Room 2 -->
   <div id="room2" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room2.jpeg" alt="Bloody Ballroom full view">
+      <a href="#!" class="close">&times;</a>
+      <img src="images/room2.jpg" alt="Bloody Ballroom full view">
       <h3>Bloody Ballroom — Where Shadows Dance</h3>
       <div class="count">17 dancers entered. 0 left.</div>
       <p>The floor still glistens with something darker than wine. The chandeliers creak as if invisible dancers swing from them, and every wrong piano note sounds like a scream.</p>
@@ -409,8 +490,8 @@
   <!-- Room 3 -->
   <div id="room3" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room3.jpeg" alt="Coffin Chamber full view">
+      <a href="#!" class="close">&times;</a>
+      <img src="images/room3.jpg" alt="Coffin Chamber full view">
       <h3>Coffin Chamber — Sleep if You Dare</h3>
       <div class="count">41 sleepers went in. 3 woke up elsewhere.</div>
       <p>The coffin-shaped bed closes on its own. Guests report dreams of being buried alive, and some wake up scratching from inside the wardrobe.</p>
@@ -425,7 +506,7 @@
   <!-- Room 4 -->
   <div id="room4" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
+      <a href="#!" class="close">&times;</a>
       <img src="images/room4.jpeg" alt="Phantom's Attic full view">
       <h3>Phantom's Attic — Echoes of Lost Souls</h3>
       <div class="count">9 explorers climbed up. 1 returned voiceless.</div>
@@ -441,7 +522,7 @@
   <!-- Room 5 -->
   <div id="room5" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
+      <a href="#!" class="close">&times;</a>
       <img src="images/room5.jpeg" alt="The Silent Crypt full view">
       <h3>The Silent Crypt — Chill in the Darkness</h3>
       <div class="count">29 guests went silent. All stayed deaf inside.</div>
@@ -457,7 +538,7 @@
   <!-- Room 6 -->
   <div id="room6" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
+      <a href="#!" class="close">&times;</a>
       <img src="images/room6.jpeg" alt="Weeping Widow Room full view">
       <h3>Weeping Widow Room — She Cries at Midnight</h3>
       <div class="count">13 suitors stayed. 13 funerals followed.</div>
@@ -473,8 +554,8 @@
   <!-- Room 7 -->
   <div id="room7" class="modal">
     <div class="modal-content">
-      <a href="#!" class="close">×</a>
-      <img src="images/room7.jpeg" alt="Vampire's Lair full view">
+      <a href="#!" class="close">&times;</a>
+      <img src="images/room7.jpg" alt="Vampire's Lair full view">
       <h3>Vampire’s Lair — Stay Forever</h3>
       <div class="count">66 visitors vanished. None show up in mirrors anymore.</div>
       <p>The minibar is full of red bottles with no labels. The mirror fogs, writing: "Drink first." Those who did never woke with a pulse.</p>
@@ -482,4 +563,290 @@
         <li>Warning: Don't drink anything uncapped.</li>
         <li>Do not photograph yourself after 3:00 a.m.</li>
       </ul>
-      <button class="btn play-btn" data-room="Vampire's Lair">Start Minigame</button
+      <button class="btn play-btn" data-room="Vampire's Lair">Start Minigame</button>
+    </div>
+  </div>
+
+  <!-- Room 8 -->
+  <div id="room8" class="modal">
+    <div class="modal-content">
+      <a href="#!" class="close">&times;</a>
+      <img src="images/room8.jpg" alt="Dollmaker's Suite full view">
+      <h3>Dollmaker’s Suite — They’re Watching You</h3>
+      <div class="count">5 visitors. 5 dolls gained new eyes.</div>
+      <p>The dolls blink when you don’t. By morning, one doll will look exactly like you—down to your heartbeat.</p>
+      <ul>
+        <li>Warning: Don't count the dolls twice.</li>
+        <li>Leave if a doll moves or smiles.</li>
+      </ul>
+      <button class="btn play-btn" data-room="Dollmaker's Suite">Start Minigame</button>
+    </div>
+  </div>
+
+  <!-- Room 9 -->
+  <div id="room9" class="modal">
+    <div class="modal-content">
+      <a href="#!" class="close">&times;</a>
+      <img src="images/room9.jpg" alt="The Curse Chamber full view">
+      <h3>The Curse Chamber — No One Leaves Alive</h3>
+      <div class="count">34 guests broke rules. 34 names carved under the bed.</div>
+      <p>Don't speak your full name. Don't open the curtains. Don't pick up the key that appears at night. Break a rule—and you join the carvings.</p>
+      <ul>
+        <li>Warning: If you find a second key, it's not for the door.</li>
+        <li>Don't finish the note under the pillow.</li>
+      </ul>
+      <button class="btn play-btn" data-room="The Curse Chamber">Start Minigame</button>
+    </div>
+  </div>
+
+  <!-- =======================
+       MINIGAME OVERLAY HTML
+  ========================-->
+  <div id="game" class="game-overlay" aria-hidden="true">
+    <div class="game-screen" id="gameScreen">
+      <a href="#!" class="game-close" id="closeGame">×</a>
+      <div class="game-title glitch" id="gameTitle" data-text="The Trial of Doors">The Trial of Doors</div>
+      <div class="game-progress" id="gameProgress">Day 1 / 5</div>
+
+      <div id="gameMessage" class="result-text"></div>
+      <div class="doors" id="doors"></div>
+
+      <button class="btn" id="restartBtn" style="display:none;">Try Again</button>
+      <button class="btn" id="backBtn" style="display:none;">Back to Rooms</button>
+    </div>
+  </div>
+
+  <!-- POPUP RESULT BOARD -->
+  <div id="board" class="board" aria-hidden="true">
+    <div class="board-box">
+      <h2 id="boardTitle" class="glitch" data-text=""></h2>
+      <p id="boardMsg"></p>
+      <p id="boardDays"></p>
+      <button class="btn" id="boardContinue">Continue</button>
+      <button class="btn" id="boardRetry" style="display:none;">Retry</button>
+      <button class="btn" id="boardExit">Exit</button>
+    </div>
+  </div>
+
+  <!-- SOUNDS -->
+  <audio id="sfxClick" src="audio/click.mp3" preload="auto"></audio>
+  <audio id="sfxDeath" src="audio/scream.mp3" preload="auto"></audio>
+  <audio id="sfxWin" src="audio/success.mp3" preload="auto"></audio>
+  <audio id="sfxAmbience" src="audio/ambience.mp3" preload="auto" loop></audio>
+
+<script>
+(() => {
+  const MAX_DAYS = 5;
+  let day = 1;
+  let safeDoor = 1;           // single safe door
+  let currentRoom = '';
+  let ambienceStarted = false;
+
+  // fake randomness pattern
+  const killerPattern = [2, 1, 3, 2, 3];
+
+  const overlay  = document.getElementById('game');
+  const doorsWrap= document.getElementById('doors');
+  const progress = document.getElementById('gameProgress');
+  const message  = document.getElementById('gameMessage');
+  const restartBtn = document.getElementById('restartBtn');
+  const backBtn = document.getElementById('backBtn');
+  const closeGame = document.getElementById('closeGame');
+  const gameTitle = document.getElementById('gameTitle');
+
+  const board    = document.getElementById('board');
+  const boardTitle = document.getElementById('boardTitle');
+  const boardMsg   = document.getElementById('boardMsg');
+  const boardDays  = document.getElementById('boardDays');
+  const boardContinue = document.getElementById('boardContinue');
+  const boardRetry    = document.getElementById('boardRetry');
+  const boardExit     = document.getElementById('boardExit');
+
+  const sfxClick = document.getElementById('sfxClick');
+  const sfxDeath = document.getElementById('sfxDeath');
+  const sfxWin   = document.getElementById('sfxWin');
+  const sfxAmb   = document.getElementById('sfxAmbience');
+
+  // Attach to all play buttons in modals
+  document.querySelectorAll('.play-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentRoom = btn.dataset.room || 'Unknown Room';
+      window.location.hash = '!';
+      startGame();
+    });
+  });
+
+  closeGame.addEventListener('click', (e) => {
+    e.preventDefault();
+    endGame();
+  });
+
+  restartBtn.addEventListener('click', () => {
+    startGame();
+  });
+
+  backBtn.addEventListener('click', endGame);
+
+  boardContinue.addEventListener('click', () => {
+    hideBoard();
+    if(day > MAX_DAYS){
+      // survived all
+      endGame();
+    }else{
+      renderDay();
+    }
+  });
+
+  boardRetry.addEventListener('click', () => {
+    hideBoard();
+    startGame();
+  });
+
+  boardExit.addEventListener('click', () => {
+    hideBoard();
+    endGame();
+  });
+
+  function startGame(){
+    if(!ambienceStarted){
+      // attempt to start ambience (some browsers need user interaction – you already clicked)
+      sfxAmb.volume = 0.4;
+      sfxAmb.play().catch(()=>{});
+      ambienceStarted = true;
+    }
+
+    day = 1;
+    message.textContent = '';
+    message.className = 'result-text';
+    restartBtn.style.display = 'none';
+    backBtn.style.display = 'none';
+    gameTitle.setAttribute('data-text', `The Trial of Doors — ${currentRoom}`);
+    gameTitle.textContent = `The Trial of Doors — ${currentRoom}`;
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    renderDay();
+  }
+
+  function endGame(){
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function renderDay(){
+    progress.textContent = `Day ${day} / ${MAX_DAYS}`;
+    doorsWrap.innerHTML = '';
+    message.textContent = '';
+    message.className = 'result-text';
+    restartBtn.style.display = 'none';
+    backBtn.style.display = 'none';
+
+    // Choose a safe door using "fake randomness" (killer door follows a pattern)
+    const killer = pickKillerDoor(day);
+    safeDoor = [1,2,3].filter(n=>n!==killer)[Math.floor(Math.random()*2)]; // one of the other doors is safe
+
+    [1,2,3].forEach(num => {
+      const d = document.createElement('button');
+      d.className = 'door';
+      d.setAttribute('aria-label', 'Door ' + num);
+      d.textContent = num;
+      d.addEventListener('click', () => chooseDoor(num, d));
+      doorsWrap.appendChild(d);
+    });
+  }
+
+  function pickKillerDoor(d){
+    // 70% follow pattern, 30% real random
+    if(Math.random() < 0.3){
+      return Math.floor(Math.random() * 3) + 1;
+    }
+    return killerPattern[(d-1) % killerPattern.length];
+  }
+
+  function chooseDoor(num, el){
+    playClick();
+
+    // kill if not the safe door
+    if(num !== safeDoor){
+      die(el);
+    } else {
+      survive();
+    }
+  }
+
+  function survive(){
+    message.textContent = 'You chose the correct door.';
+    message.classList.add('win');
+
+    // board popup
+    showBoard({
+      title: 'You Chose Correctly',
+      msg: 'The door creaks open. Something lets you pass… this time.',
+      days: `Days survived: ${day} / ${MAX_DAYS}`,
+      died: false,
+      finished: (day === MAX_DAYS)
+    });
+
+    sfxWin.volume = 0.6;
+    sfxWin.currentTime = 0;
+    sfxWin.play().catch(()=>{});
+
+    day++;
+    if(day > MAX_DAYS){
+      // finished
+      restartBtn.style.display = 'inline-block';
+      backBtn.style.display = 'inline-block';
+    }
+  }
+
+  function die(el){
+    el.classList.add('shake');
+    message.textContent = 'Wrong door. You died.';
+    message.classList.add('die');
+    doorsWrap.innerHTML = '';
+
+    sfxDeath.volume = 0.8;
+    sfxDeath.currentTime = 0;
+    sfxDeath.play().catch(()=>{});
+
+    // board popup
+    showBoard({
+      title: 'You Died',
+      msg: 'Icy hands drag you into the dark. The hotel writes your name…',
+      days: `You survived ${day-1} day(s).`,
+      died: true,
+      finished: false
+    });
+
+    restartBtn.style.display = 'inline-block';
+    backBtn.style.display = 'inline-block';
+  }
+
+  function showBoard({title, msg, days, died, finished}){
+    boardTitle.setAttribute('data-text', title);
+    boardTitle.textContent = title;
+    boardMsg.textContent = msg;
+    boardDays.textContent = days;
+
+    boardRetry.style.display = died ? 'inline-block' : 'none';
+    boardContinue.style.display = (!died && !finished) ? 'inline-block' : 'none';
+    boardExit.textContent = finished && !died ? 'Exit (You Survived)' : 'Exit';
+
+    board.classList.add('active');
+    board.setAttribute('aria-hidden', 'false');
+  }
+
+  function hideBoard(){
+    board.classList.remove('active');
+    board.setAttribute('aria-hidden', 'true');
+  }
+
+  function playClick(){
+    sfxClick.volume = 0.4;
+    sfxClick.currentTime = 0;
+    sfxClick.play().catch(()=>{});
+  }
+})();
+</script>
+</body>
+</html>
